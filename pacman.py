@@ -579,7 +579,7 @@ class Population:
 
 
             # prints the best individual for that generation, like a verbose.
-            print(f'Gen {i} Best Individual: {max(self.individuals, key=attrgetter("fitness"))}')
+            print(f'Gen {i+1} Best Individual: {max(self.individuals, key=attrgetter("fitness"))}')
 
         # The final best individual is "recreated" to allow for its game to be stored so that it can be played later with the "get_history" function
         self.best_individual = Individual(representation=self.best_individual.representation,
