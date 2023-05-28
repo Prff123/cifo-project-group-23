@@ -37,11 +37,17 @@ print()
 print()
 print()
 
+while True:
+    #Initializes Population
+    pop = Population(size=500, generated_map=map, moves=500, stepback=False)
 
-#Initializes Population
-pop = Population(size=500, generated_map=map, moves=500, stepback=False)
+    #Evolves Population
+    pop.evolve(gens=300, select=tournament_sel, mutate=inversion_mutation,
+               crossover=uniform_co, mut_prob=0.1, xo_prob=0.9, elitism=True)
 
-#Evolves Population
-pop.evolve(gens=300, select=tournament_sel, mutate=inversion_mutation,
-           crossover=uniform_co, mut_prob=0.1, xo_prob=0.9, elitism=True)
+    print(pop.best_individual)
+    if pop.best_individual.fitness < 20000:
+        pop.best_individual.get_history()
+        break
+
 

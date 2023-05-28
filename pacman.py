@@ -5,13 +5,13 @@ import time
 
 
 class Individual:
-    def __init__(self, representation=None, size=None, generated_map=None, fruit_points=1000, points=100,
+    def __init__(self, representation=None, moves=None, generated_map=None, fruit_points=1000, points=100,
                  history_state=False, stepback=False):
 
         valid_set = ("L", "D", "R", "U")
 
         if representation is None:
-            self.representation = [choice(valid_set) for _ in range(size)]
+            self.representation = [choice(valid_set) for _ in range(moves)]
         else:
             self.representation = representation
 
@@ -513,7 +513,7 @@ class Population:
 
         for i in range(size):
             self.individuals.append(
-                Individual(size=self.moves,
+                Individual(moves=self.moves,
                            generated_map=self.map,
                            fruit_points=self.fruit_points,
                            points=self.points,
@@ -571,7 +571,7 @@ class Population:
             self.best_individuals_gen.append(max(self.individuals, key=attrgetter("fitness")))
 
             # update the population best overall individual if there is a new best
-            if max(self.individuals, key=attrgetter("fitness")).fitness > self.best_individual.fitness:
+            if max(self.individuals, key=attrgetter("fitness")).fitness >= self.best_individual.fitness:
                 self.best_individual = Individual(representation=max(self.individuals, key=attrgetter("fitness")).representation,
                                               generated_map=self.original_map, fruit_points=self.fruit_points,
                                               points=self.points, history_state=False, stepback=self.stepback)
